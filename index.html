@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baby Shower · ¿Niño o Niña?</title>
+<meta name="description" content="¡Estás invitado a nuestro Baby Shower! 25 de octubre 2026 · 3:00 pm">
+<!-- Vista previa al compartir el link (WhatsApp, Facebook, etc.) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://baby-shower-25-09.netlify.app/">
+<meta property="og:title" content="Baby Shower · ¿Niño o Niña? 💙💗">
+<meta property="og:description" content="¡Tienes una invitación! 25 de octubre 2026 · 3:00 pm. Ábrela y descubre la sorpresa.">
+<meta property="og:image" content="https://baby-shower-25-09.netlify.app/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sobre de invitación al Baby Shower: ¿Niño o Niña?">
+<meta property="og:locale" content="es_MX">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://baby-shower-25-09.netlify.app/preview.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --marino:#1d4e9e; --rosa:#ef4f7e; --rosa-o:#d8406f;
+    --cielo:#dcebff; --chicle:#ffe3ec; --blanco:#fff;
+    --titulo:'Lilita One',system-ui,sans-serif;
+    --texto:'Fredoka',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{font-size:18px}
+  body{
+    font-family:var(--texto);color:var(--marino);min-height:100vh;overflow-x:hidden;
+    background:#c9d8f7;
+  }
+  body::before{content:"";position:fixed;inset:0;z-index:0;background:linear-gradient(118deg,#f9c3d3 0 42%,#c9d8f7 42% 100%)}
+  .rosa{--c1:#f9a8c3;--c2:#ef4f7e;--c3:#d8406f}
+  .azul{--c1:#8ec5fb;--c2:#2d6bd3;--c3:#2a5fb8}
+  .ico{display:block;overflow:visible;height:auto;aspect-ratio:1}
+
+  /* ===== Animaciones base ===== */
+  @keyframes flotar{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-10px) rotate(calc(var(--r,0deg) + 4deg))}}
+  @keyframes salto{0%{transform:scale(1) rotate(var(--r,0deg))}30%{transform:scale(1.25) rotate(calc(var(--r,0deg) - 14deg))}60%{transform:scale(.92) rotate(calc(var(--r,0deg) + 12deg))}100%{transform:scale(1) rotate(var(--r,0deg))}}
+  @keyframes latido{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+  @keyframes girar{to{transform:rotate(360deg)}}
+  @keyframes subir{to{transform:translateY(calc(-100vh - 260px))}}
+  @keyframes vaiven{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
+  @keyframes temblor{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .deco{position:absolute;cursor:pointer;animation:flotar 4s ease-in-out infinite;z-index:2;-webkit-tap-highlight-color:transparent}
+  .deco.salta{animation:salto .6s ease}
+
+  /* ===== Globos de fondo ===== */
+  #globos{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+  .globo-wrap{position:absolute;bottom:-170px;pointer-events:auto;cursor:pointer;animation:subir linear forwards}
+  .globo{width:60px;height:74px;position:relative;border-radius:50% 50% 48% 48%/55% 55% 45% 45%;animation:vaiven 3.4s ease-in-out infinite alternate;transform-origin:50% 140%}
+  .globo::before{content:"";position:absolute;top:14%;left:20%;width:20%;height:26%;border-radius:50%;background:rgba(255,255,255,.75);transform:rotate(25deg)}
+  .globo::after{content:"";position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:8px solid currentColor}
+  .hilo{position:absolute;left:50%;top:100%;width:2px;height:80px;background:linear-gradient(currentColor,transparent);opacity:.7}
+
+  canvas#confeti{position:fixed;inset:0;pointer-events:none;z-index:70}
+
+  /* ===== Pantalla de entrada ===== */
+  #intro{
+    position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
+    background:linear-gradient(118deg,#f9c3d3 0 50%,#c9d8f7 50% 100%);
+    transition:opacity .8s, visibility .8s;padding:20px;text-align:center;overflow:hidden;
+  }
+  #intro.oculto{opacity:0;visibility:hidden}
+  .sello{
+    width:240px;height:240px;border-radius:50%;border:10px solid #fff;cursor:pointer;
+    background:var(--cielo);
+    box-shadow:0 18px 40px rgba(29,78,158,.25);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    font-family:var(--titulo);line-height:.9;animation:latido 2s ease-in-out infinite;
+  }
+  .sello .el{font-size:3.4rem;color:var(--marino)}
+  .sello .o{font-size:1.6rem;color:var(--marino);margin:2px 0}
+  .sello .ella{font-size:3.4rem;color:var(--rosa)}
+  .intro-txt{font-family:var(--titulo);font-size:1.5rem;color:#fff;text-shadow:0 2px 0 var(--marino),0 3px 10px rgba(29,78,158,.35);letter-spacing:.03em}
+  .intro-sub{font-weight:500;color:var(--marino);opacity:.8}
+
+  /* ===== Botón de música ===== */
+  #musica{position:fixed;right:16px;bottom:16px;z-index:55;width:60px;height:60px;border-radius:50%;border:5px solid #fff;background:var(--rosa);color:#fff;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(29,78,158,.25)}
+  #musica.visible{display:flex}
+  #musica svg{width:24px;height:24px}
+  #musica.sonando svg{animation:girar 4s linear infinite}
+  #musica.pausa{background:var(--marino)}
+
+  /* ===== Contenedor ===== */
+  main{position:relative;z-index:2;max-width:560px;margin:0 auto;padding:34px 16px 100px;display:flex;flex-direction:column;gap:30px}
+  .aparece{opacity:0;transform:translateY(30px) scale(.97);transition:all .8s cubic-bezier(.2,.9,.3,1.2)}
+  .aparece.visible{opacity:1;transform:none}
+
+  /* Sticker: borde blanco + sombra */
+  .sticker{position:relative;background:#fff;padding:10px;border-radius:40px;box-shadow:0 14px 34px rgba(29,78,158,.18)}
+  .sticker > .in{position:relative;border-radius:31px;overflow:hidden;padding:34px 22px;text-align:center}
+  .fondo-cielo{background:var(--cielo)}
+  .sticker > .in.holgado{padding:44px 34px}
+  .sticker > .in.con-nubes{padding-bottom:78px}
+  .sticker > .in.con-deco{padding-bottom:84px}
+  .fondo-chicle{background:var(--chicle)}
+
+  /* Nubes en la base de las tarjetas */
+  .nubes{position:absolute;left:0;right:0;bottom:-6px;height:50px;pointer-events:none}
+  .nubes svg{position:absolute;bottom:0}
+
+  /* ===== Portada (forma de arco) ===== */
+  .arco{border-radius:260px 260px 40px 40px}
+  .arco > .in{border-radius:250px 250px 31px 31px;padding:64px 20px 60px}
+  .pill{display:inline-block;background:var(--rosa);color:#fff;font-family:var(--titulo);font-size:1.15rem;letter-spacing:.2em;padding:8px 22px 7px;border-radius:40px;box-shadow:0 4px 0 var(--rosa-o)}
+  h1{font-family:var(--titulo);font-weight:400;line-height:.88;margin:18px 0 10px}
+  h1 span{display:block;text-shadow:0 5px 0 #fff,0 10px 18px rgba(29,78,158,.18)}
+  h1 .nino{font-size:clamp(3.8rem,17vw,5.8rem);color:var(--marino)}
+  h1 .o{font-size:2.2rem;color:var(--marino);margin:4px 0}
+  h1 .nina{font-size:clamp(3.8rem,17vw,5.8rem);color:var(--rosa)}
+  .subtitulo{font-size:1.35rem;font-weight:600;color:var(--rosa)}
+  .ilustra{position:relative;height:150px;margin:24px auto 0;max-width:360px}
+  .interroga{position:absolute;font-family:var(--titulo);font-size:3rem;cursor:pointer;animation:flotar 3.5s ease-in-out infinite}
+
+  .texto{font-size:1.3rem;line-height:1.55;font-weight:500;color:#3a4f78;max-width:430px;margin:0 auto}
+  .texto b{color:var(--rosa)}
+
+  /* ===== Fecha y hora ===== */
+  .detalles{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .forma{filter:drop-shadow(0 12px 18px rgba(29,78,158,.2))}
+  .forma .borde{background:#fff;padding:9px}
+  .forma .relleno{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative}
+  .escudo .borde,.escudo .relleno{clip-path:polygon(0 0,100% 0,100% 80%,50% 100%,0 80%)}
+  .escudo .borde{border-radius:30px 30px 0 0}
+  .escudo .relleno{border-radius:22px 22px 0 0;background:var(--chicle);min-height:250px;padding:18px 8px 56px}
+  .hexa .borde,.hexa .relleno{clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%)}
+  .hexa .borde{padding:10px 14px}
+  .hexa .relleno{background:var(--cielo);min-height:250px;padding:20px 10px}
+  .etq{font-family:var(--titulo);font-size:1.05rem;letter-spacing:.2em;color:var(--rosa)}
+  .grande{font-family:var(--titulo);font-size:4.6rem;line-height:.95;color:var(--marino)}
+  .medio{font-family:var(--titulo);font-size:1.8rem;line-height:1;color:var(--marino)}
+  .chico{font-size:1.05rem;font-weight:600;color:var(--rosa);margin-top:6px}
+
+  /* ===== Cuenta regresiva ===== */
+  .titulo-sec{font-family:var(--titulo);font-weight:400;font-size:2.3rem;line-height:1;color:var(--marino);text-align:center}
+  .titulo-sec .r{color:var(--rosa)}
+  .cuenta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+  .cuenta div{aspect-ratio:1;border-radius:50%;border:7px solid #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 10px 22px rgba(29,78,158,.16)}
+  .cuenta div:nth-child(odd){background:var(--cielo)}
+  .cuenta div:nth-child(even){background:var(--chicle)}
+  .cuenta b{font-family:var(--titulo);font-weight:400;font-size:2.6rem;line-height:1;color:var(--marino)}
+  .cuenta div:nth-child(even) b{color:var(--rosa)}
+  .cuenta span{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#3a4f78}
+
+  /* ===== Votación ===== */
+  .team{font-family:var(--titulo);font-weight:400;line-height:.95;margin-bottom:12px}
+  .team .tr{display:block;font-size:2.7rem;color:var(--rosa)}
+  .team .to{display:block;font-size:1.5rem;color:var(--marino)}
+  .team .ta{display:block;font-size:2.7rem;color:var(--marino)}
+  #nombreVoto{
+    width:100%;max-width:340px;margin-top:18px;padding:15px 20px;border-radius:40px;border:3px solid #fff;
+    background:#fff;text-align:center;font-family:var(--texto);font-size:1.15rem;font-weight:500;color:var(--marino);
+    outline:none;box-shadow:0 6px 16px rgba(29,78,158,.12)
+  }
+  #nombreVoto::placeholder{color:#8aa0c8}
+  #nombreVoto:focus{border-color:var(--rosa)}
+  #nombreVoto.error{border-color:var(--rosa);animation:temblor .4s}
+  .votos{display:flex;justify-content:center;gap:18px;margin-top:24px}
+  .voto{
+    width:150px;aspect-ratio:1;border-radius:50%;border:8px solid #fff;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    box-shadow:0 12px 24px rgba(29,78,158,.2);transition:transform .3s,opacity .3s;
+    font-family:var(--titulo);font-size:1.15rem;letter-spacing:.05em;-webkit-tap-highlight-color:transparent
+  }
+  .voto svg{width:70px;height:70px}
+  .voto.rosa{background:var(--chicle);color:var(--rosa)}
+  .voto.azul{background:var(--cielo);color:var(--marino)}
+  .voto:hover{transform:translateY(-5px) rotate(-3deg)}
+  .voto.elegido{transform:scale(1.1);box-shadow:0 0 0 6px currentColor,0 14px 28px rgba(29,78,158,.25)}
+  .voto.apagado{opacity:.4;transform:scale(.92)}
+  #mensajeVoto{min-height:34px;margin-top:18px;font-size:1.3rem;font-weight:600}
+
+  /* ===== Lugar y confirmación ===== */
+  .btn-mapa{
+    display:inline-flex;align-items:center;gap:12px;margin-top:18px;
+    padding:18px 32px;border-radius:50px;border:5px solid #fff;text-decoration:none;
+    font-family:var(--titulo);font-size:1.35rem;letter-spacing:.06em;color:#fff;background:var(--marino);
+    box-shadow:0 6px 0 #133a7a,0 14px 24px rgba(29,78,158,.3);transition:transform .15s,box-shadow .15s
+  }
+  .btn-mapa:hover{transform:translateY(-2px)}
+  .btn-mapa:active{transform:translateY(4px);box-shadow:0 2px 0 #133a7a,0 6px 12px rgba(29,78,158,.3)}
+  .btn-mapa svg{width:26px;height:26px}
+  .confirma{margin-top:30px;font-size:1.3rem;font-weight:500;line-height:1.45;color:#3a4f78}
+  .confirma strong{display:block;font-family:var(--titulo);font-weight:400;font-size:1.8rem;color:var(--rosa);margin-bottom:4px}
+
+  .final{text-align:center;padding:10px 0 0}
+  .final .titulo-sec{font-size:3.2rem;color:var(--marino);text-shadow:0 4px 0 #fff,0 10px 20px rgba(29,78,158,.2)}
+  .final .titulo-sec .r{color:var(--rosa)}
+  .firma{font-size:1.25rem;font-weight:600;color:var(--marino);margin-top:10px}
+  .pista{font-size:.9rem;font-weight:500;color:var(--marino);opacity:.7;margin-top:18px}
+
+  @media (max-width:480px){
+    html{font-size:16px}
+    .grande{font-size:4.2rem}
+    .votos{gap:12px}
+    .voto{width:140px}
+    .cuenta{gap:7px}
+    .cuenta div{border-width:5px}
+    .cuenta b{font-size:2.2rem}
+    .cuenta span{font-size:.68rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Ilustraciones (dibujos reutilizables) ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-mameluco" viewBox="0 0 100 100">
+      <path d="M32 14 L42 10 Q50 20 58 10 L68 14 L88 30 L78 44 L68 36 V70 Q68 80 58 84 V92 H42 V84 Q32 80 32 70 V36 L22 44 L12 30 Z" fill="var(--c1)" stroke="var(--c3)" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M42 10 Q50 20 58 10" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+      <path d="M50 62 c-10-7-12-14-6-17 c3-1.5 5 0 6 2 c1-2 3-3.5 6-2 c6 3 4 10-6 17z" fill="#fff"/>
+      <circle cx="46" cy="88" r="1.8" fill="#fff"/><circle cx="54" cy="88" r="1.8" fill="#fff"/>
+    </symbol>
+    <symbol id="i-calcetin" viewBox="0 0 100 100">
+      <path d="M36 22 H66 V56 L84 70 Q95 80 87 90 Q79 99 67 91 L42 72 Q36 66 36 58 Z" fill="var(--c1)" stroke="var(--c3)" stroke-width="3" stroke-linejoin="round"/>
+      <rect x="33" y="6" width="36" height="18" rx="6" fill="var(--c2)" stroke="var(--c3)" stroke-width="3"/>
+      <path d="M41 9 v12 M47 9 v12 M53 9 v12 M59 9 v12 M65 9 v12" stroke="#fff" stroke-width="2" opacity=".5"/>
+      <circle cx="46" cy="36" r="3.5" fill="#fff"/><circle cx="57" cy="46" r="3.5" fill="#fff"/><circle cx="46" cy="56" r="3.5" fill="#fff"/><circle cx="62" cy="66" r="3.5" fill="#fff"/><circle cx="74" cy="80" r="3.5" fill="#fff"/>
+    </symbol>
+    <symbol id="i-biberon" viewBox="0 0 100 100">
+      <path d="M42 22 Q41 5 50 5 Q59 5 58 22 Z" fill="#f6d19b" stroke="#d9a864" stroke-width="3"/>
+      <rect x="32" y="20" width="36" height="13" rx="5" fill="var(--c2)" stroke="var(--c3)" stroke-width="3"/>
+      <rect x="30" y="33" width="40" height="60" rx="13" fill="var(--c1)" stroke="var(--c3)" stroke-width="3"/>
+      <path d="M58 44 h8 M58 54 h8 M58 64 h8" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      <path d="M46 76 c-8-6-10-12-5-14.5 c2.5-1.2 4 0 5 1.8 c1-1.8 2.5-3 5-1.8 c5 2.5 3 8.5-5 14.5z" fill="#fff"/>
+    </symbol>
+    <symbol id="i-chupon" viewBox="0 0 100 100">
+      <circle cx="50" cy="74" r="16" fill="none" stroke="var(--c2)" stroke-width="8"/>
+      <path d="M42 38 Q39 12 50 10 Q61 12 58 38 Z" fill="#f6d19b" stroke="#d9a864" stroke-width="3"/>
+      <ellipse cx="50" cy="48" rx="30" ry="14" fill="var(--c1)" stroke="var(--c3)" stroke-width="3"/>
+      <circle cx="50" cy="48" r="5" fill="#fff"/>
+    </symbol>
+    <symbol id="i-gorro" viewBox="0 0 100 100">
+      <circle cx="50" cy="16" r="10" fill="var(--c2)" stroke="var(--c3)" stroke-width="3"/>
+      <path d="M18 70 Q18 24 50 24 Q82 24 82 70 Z" fill="var(--c1)" stroke="var(--c3)" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M34 30 Q28 48 28 68 M50 25 V68 M66 30 Q72 48 72 68" stroke="#fff" stroke-width="3" opacity=".55" fill="none"/>
+      <rect x="13" y="64" width="74" height="20" rx="9" fill="var(--c2)" stroke="var(--c3)" stroke-width="3"/>
+      <polygon points="50,67 52.4,72 58,72.6 53.8,76.4 55,82 50,79 45,82 46.2,76.4 42,72.6 47.6,72" fill="#ffd66b"/>
+    </symbol>
+    <symbol id="i-sonaja" viewBox="0 0 100 100">
+      <path d="M50 14 c-18-13-26-2-20 8 c4 7 20 18 20 18 s16-11 20-18 c6-10-2-21-20-8z" fill="var(--c1)" stroke="var(--c3)" stroke-width="3"/>
+      <rect x="45" y="40" width="10" height="36" rx="5" fill="var(--c2)" stroke="var(--c3)" stroke-width="3"/>
+      <circle cx="50" cy="84" r="11" fill="none" stroke="var(--c2)" stroke-width="7"/>
+    </symbol>
+    <symbol id="i-estrella" viewBox="0 0 24 24">
+      <polygon points="12,2 14.9,8.6 22,9.3 16.6,14 18.2,21 12,17.3 5.8,21 7.4,14 2,9.3 9.1,8.6" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-corazon" viewBox="0 0 24 24">
+      <path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" fill="currentColor"/>
+    </symbol>
+    <symbol id="i-nube" viewBox="0 0 120 60">
+      <path d="M18 60 a16 16 0 0 1 6-31 a22 22 0 0 1 40-9 a18 18 0 0 1 32 10 a15 15 0 0 1 6 30 z" fill="#fff"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- Formulario oculto para que Netlify guarde los votos -->
+<form name="votos" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input name="nombre"><input name="equipo"><input name="bot-field">
+</form>
+
+<audio id="cancion" src="cancion.mp3" loop preload="auto"></audio>
+
+<!-- ===== Pantalla de entrada ===== -->
+<div id="intro">
+  <svg class="ico deco rosa" style="width:90px;top:9%;left:7%;--r:-14deg"><use href="#i-mameluco"/></svg>
+  <svg class="ico deco azul" style="width:80px;top:12%;right:8%;--r:12deg;animation-delay:-1s"><use href="#i-gorro"/></svg>
+  <svg class="ico deco azul" style="width:80px;bottom:12%;left:9%;--r:10deg;animation-delay:-2s"><use href="#i-calcetin"/></svg>
+  <svg class="ico deco rosa" style="width:74px;bottom:14%;right:9%;--r:-10deg;animation-delay:-.5s"><use href="#i-biberon"/></svg>
+  <svg class="ico deco" style="width:26px;top:30%;left:18%;color:#fff"><use href="#i-estrella"/></svg>
+  <svg class="ico deco" style="width:22px;top:26%;right:22%;color:var(--rosa)"><use href="#i-corazon"/></svg>
+  <svg class="ico deco" style="width:24px;bottom:30%;right:18%;color:var(--marino)"><use href="#i-estrella"/></svg>
+  <svg class="ico deco" style="width:20px;bottom:32%;left:22%;color:#fff"><use href="#i-corazon"/></svg>
+
+  <p class="intro-txt">¡Tienes una invitación!</p>
+  <button class="sello" id="abrir" aria-label="Abrir invitación">
+    <span class="el">¿ÉL</span><span class="o">o</span><span class="ella">ELLA?</span>
+  </button>
+  <p class="intro-sub">Toca para abrir · ♪ sube el volumen</p>
+</div>
+
+<button id="musica" aria-label="Pausar o reproducir música">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+</button>
+
+<div id="globos"></div>
+<canvas id="confeti"></canvas>
+
+<main>
+  <!-- ===== Portada ===== -->
+  <section class="sticker arco aparece">
+    <div class="in fondo-cielo">
+      <svg class="ico deco" style="width:26px;top:60px;left:22%;color:#fff"><use href="#i-estrella"/></svg>
+      <svg class="ico deco" style="width:22px;top:90px;right:18%;color:var(--rosa);animation-delay:-1s"><use href="#i-corazon"/></svg>
+      <svg class="ico deco" style="width:20px;top:48%;left:6%;color:#8ec5fb;animation-delay:-2s"><use href="#i-estrella"/></svg>
+      <svg class="ico deco" style="width:20px;top:44%;right:6%;color:#f9a8c3;animation-delay:-1.5s"><use href="#i-corazon"/></svg>
+
+      <span class="pill">BABY SHOWER</span>
+      <h1>
+        <span class="nino">¿NIÑO</span>
+        <span class="o">o</span>
+        <span class="nina">NIÑA?</span>
+      </h1>
+      <p class="subtitulo">¡Descúbrelo con nosotros!</p>
+
+      <div class="ilustra">
+        <svg class="ico deco rosa" style="width:118px;left:4%;top:4px;--r:-10deg"><use href="#i-mameluco"/></svg>
+        <svg class="ico deco azul" style="width:118px;right:4%;top:16px;--r:9deg;animation-delay:-1.3s"><use href="#i-mameluco"/></svg>
+        <svg class="ico deco azul" style="width:62px;left:36%;top:-6px;--r:-8deg;animation-delay:-.6s"><use href="#i-gorro"/></svg>
+        <svg class="ico deco rosa" style="width:58px;left:42%;top:84px;--r:12deg;animation-delay:-2.2s"><use href="#i-gorro"/></svg>
+        <span class="interroga" style="left:0;top:100px;color:var(--marino);--r:-12deg">?</span>
+        <span class="interroga" style="right:0;top:-18px;color:var(--rosa);--r:14deg;animation-delay:-1s">?</span>
+      </div>
+
+      <div class="nubes">
+        <svg style="width:130px;left:-20px"><use href="#i-nube"/></svg>
+        <svg style="width:110px;left:38%;bottom:-8px"><use href="#i-nube"/></svg>
+        <svg style="width:140px;right:-24px"><use href="#i-nube"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Texto ===== -->
+  <section class="sticker aparece">
+    <div class="in fondo-chicle holgado">
+      <p class="texto">
+        Un pequeño milagro viene en camino y todavía guarda su <b>dulce secreto</b>.
+        Acompáñanos a celebrar la espera, llenar de amor esta nueva etapa
+        y compartir juntos la emoción de lo que está por llegar.
+      </p>
+      <svg class="ico deco azul" style="width:40px;right:8px;bottom:6px;--r:18deg"><use href="#i-chupon"/></svg>
+      <svg class="ico deco rosa" style="width:38px;left:8px;top:6px;--r:-18deg;animation-delay:-1s"><use href="#i-sonaja"/></svg>
+    </div>
+  </section>
+
+  <!-- ===== Fecha y hora ===== -->
+  <section class="detalles aparece">
+    <div class="forma escudo">
+      <div class="borde"><div class="relleno">
+        <span class="etq">FECHA</span>
+        <span class="grande">25</span>
+        <span class="medio">OCTUBRE</span>
+        <span class="chico">Domingo · 2026</span>
+      </div></div>
+    </div>
+    <div class="forma escudo">
+      <div class="borde"><div class="relleno">
+        <span class="etq">HORA</span>
+        <span class="grande">3:00</span>
+        <span class="medio">P.M.</span>
+        <span class="chico">¡Puntuales!</span>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ===== Cuenta regresiva ===== -->
+  <section class="aparece">
+    <h2 class="titulo-sec">¡Faltan!</h2>
+    <div class="cuenta">
+      <div><b id="d">0</b><span>Días</span></div>
+      <div><b id="h">0</b><span>Horas</span></div>
+      <div><b id="m">0</b><span>Min</span></div>
+      <div><b id="s">0</b><span>Seg</span></div>
+    </div>
+  </section>
+
+  <!-- ===== Votación ===== -->
+  <section class="sticker aparece">
+    <div class="in fondo-cielo con-nubes">
+      <svg class="ico deco" style="width:24px;top:20px;left:18px;color:#fff"><use href="#i-estrella"/></svg>
+      <svg class="ico deco" style="width:22px;top:24px;right:20px;color:var(--rosa);animation-delay:-1s"><use href="#i-corazon"/></svg>
+      <h2 class="team">
+        <span class="tr">¿TEAM ROSA</span>
+        <span class="to">o</span>
+        <span class="ta">TEAM AZUL?</span>
+      </h2>
+      <p class="texto">Ven vestido de <b style="color:var(--marino)">azul</b> si crees que es niño, o de <b>rosa</b> si crees que es niña. ¡Escribe tu nombre y vota!</p>
+      <input id="nombreVoto" type="text" placeholder="Tu nombre" maxlength="60" autocomplete="name">
+      <div class="votos">
+        <button class="voto rosa" data-equipo="nina">
+          <svg class="ico"><use href="#i-mameluco"/></svg>NIÑA
+        </button>
+        <button class="voto azul" data-equipo="nino">
+          <svg class="ico"><use href="#i-mameluco"/></svg>NIÑO
+        </button>
+      </div>
+      <p id="mensajeVoto"></p>
+      <div class="nubes">
+        <svg style="width:110px;left:-16px"><use href="#i-nube"/></svg>
+        <svg style="width:120px;right:-20px"><use href="#i-nube"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Lugar y confirmación ===== -->
+  <section class="sticker aparece">
+    <div class="in fondo-chicle con-deco">
+      <h2 class="titulo-sec">¿Dónde <span class="r">será?</span></h2>
+      <a class="btn-mapa" id="btnMapa" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        VER UBICACIÓN
+      </a>
+      <p class="confirma">
+        <strong>Por favor, confirma tu asistencia</strong>
+        <br>¡Nos encantará contar contigo!
+      </p>
+      <svg class="ico deco azul" style="width:52px;left:24px;bottom:10px;--r:-14deg"><use href="#i-calcetin"/></svg>
+      <svg class="ico deco rosa" style="width:50px;right:24px;bottom:12px;--r:14deg;animation-delay:-1.2s"><use href="#i-biberon"/></svg>
+    </div>
+  </section>
+
+  <!-- ===== Cierre ===== -->
+  <section class="final aparece">
+    <h2 class="titulo-sec">¡Te <span class="r">esperamos!</span></h2>
+    <p class="firma" id="firma"></p>
+    <p class="pista">Psst… toca los dibujitos y revienta los globos 🎈</p>
+  </section>
+</main>
+
+<script>
+/* ================================================
+   CONFIGURACIÓN — edita aquí tus datos
+   ================================================ */
+const CONFIG = {
+  mapa: "https://maps.app.goo.gl/Hwitgxeba6m7suDn6",
+  fecha: "2026-10-25T15:00:00-06:00",
+  firma: "Con cariño, los futuros papás",
+  volumen: 0.6          // 0 a 1
+};
+
+document.getElementById("btnMapa").href = CONFIG.mapa;
+document.getElementById("firma").textContent = CONFIG.firma;
+
+/* ===== Música ===== */
+const audio = document.getElementById("cancion");
+const btnMusica = document.getElementById("musica");
+audio.volume = CONFIG.volumen;
+function reproducir(){
+  audio.play().then(() => { btnMusica.classList.add("sonando"); btnMusica.classList.remove("pausa"); }).catch(() => {});
+}
+btnMusica.addEventListener("click", () => {
+  if (audio.paused) reproducir();
+  else { audio.pause(); btnMusica.classList.remove("sonando"); btnMusica.classList.add("pausa"); }
+});
+
+/* ===== Confeti ===== */
+const cv = document.getElementById("confeti"), ctx = cv.getContext("2d");
+let piezas = [];
+function ajustar(){ cv.width = innerWidth; cv.height = innerHeight; }
+addEventListener("resize", ajustar); ajustar();
+const PALETA = {
+  mix:  ["#1d4e9e","#ef4f7e","#8ec5fb","#f9a8c3","#ffd66b","#ffffff"],
+  nino: ["#1d4e9e","#2d6bd3","#8ec5fb","#ffd66b","#ffffff"],
+  nina: ["#ef4f7e","#d8406f","#f9a8c3","#ffd66b","#ffffff"]
+};
+function explotar(x, y, n = 80, paleta = "mix", fuerza = 9){
+  const cols = PALETA[paleta];
+  for (let i = 0; i < n; i++){
+    const a = Math.random() * Math.PI * 2, v = Math.random() * fuerza + 2;
+    piezas.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 3,
+      r: Math.random() * 6 + 4, rot: Math.random() * 6, vr: (Math.random() - .5) * .3,
+      c: cols[Math.random() * cols.length | 0], vida: 1,
+      forma: ["rect","circ","estrella"][Math.random() * 3 | 0] });
+  }
+}
+function estrella(r){
+  ctx.beginPath();
+  for (let i = 0; i < 10; i++){
+    const rad = i % 2 ? r * .45 : r, a = i * Math.PI / 5 - Math.PI / 2;
+    ctx.lineTo(Math.cos(a) * rad, Math.sin(a) * rad);
+  }
+  ctx.closePath(); ctx.fill();
+}
+(function animar(){
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  piezas = piezas.filter(p => p.vida > 0);
+  for (const p of piezas){
+    p.vy += .18; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.vida -= .008;
+    ctx.save(); ctx.globalAlpha = Math.max(p.vida, 0);
+    ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.fillStyle = p.c;
+    if (p.forma === "circ"){ ctx.beginPath(); ctx.arc(0, 0, p.r / 1.7, 0, 7); ctx.fill(); }
+    else if (p.forma === "estrella") estrella(p.r * .8);
+    else ctx.fillRect(-p.r / 2, -p.r / 4, p.r, p.r / 2);
+    ctx.restore();
+  }
+  requestAnimationFrame(animar);
+})();
+
+/* ===== Dibujitos que brincan al tocarlos ===== */
+document.querySelectorAll(".deco, .interroga").forEach(el => {
+  el.addEventListener("pointerdown", () => {
+    el.classList.remove("salta"); void el.getBoundingClientRect(); el.classList.add("salta");
+    const r = el.getBoundingClientRect();
+    const pal = el.classList.contains("azul") ? "nino" : el.classList.contains("rosa") ? "nina" : "mix";
+    explotar(r.left + r.width / 2, r.top + r.height / 2, 18, pal, 5);
+  });
+  el.addEventListener("animationend", () => el.classList.remove("salta"));
+});
+
+/* ===== Globos de fondo ===== */
+const capa = document.getElementById("globos");
+const TONOS = [["#8ec5fb","nino"],["#2d6bd3","nino"],["#f9a8c3","nina"],["#ef4f7e","nina"],["#ffd66b","mix"]];
+function crearGlobo(){
+  const [color, pal] = TONOS[Math.random() * TONOS.length | 0];
+  const esc = .7 + Math.random() * .6;
+  const w = document.createElement("div");
+  w.className = "globo-wrap";
+  w.style.left = (Math.random() * 92) + "vw";
+  w.style.animationDuration = (11 + Math.random() * 9) + "s";
+  w.style.color = color;
+  w.innerHTML = `<div class="globo" style="transform:scale(${esc});background:${color};animation-delay:-${Math.random()*3}s"><span class="hilo"></span></div>`;
+  w.addEventListener("pointerdown", () => {
+    const r = w.firstChild.getBoundingClientRect();
+    explotar(r.left + r.width / 2, r.top + r.height / 2, 45, pal, 6);
+    w.remove();
+  });
+  w.addEventListener("animationend", e => { if (e.target === w) w.remove(); });
+  capa.appendChild(w);
+}
+function iniciarGlobos(){
+  for (let i = 0; i < 6; i++) setTimeout(crearGlobo, i * 500);
+  setInterval(() => { if (capa.children.length < 10) crearGlobo(); }, 1800);
+}
+
+/* ===== Abrir invitación ===== */
+document.getElementById("abrir").addEventListener("click", e => {
+  const r = e.currentTarget.getBoundingClientRect();
+  explotar(r.left + r.width / 2, r.top + r.height / 2, 170, "mix", 14);
+  document.getElementById("intro").classList.add("oculto");
+  btnMusica.classList.add("visible");
+  reproducir();
+  iniciarGlobos();
+  revelar();
+});
+function revelar(){
+  const io = new IntersectionObserver(ents => ents.forEach(en => {
+    if (en.isIntersecting){ en.target.classList.add("visible"); io.unobserve(en.target); }
+  }), { threshold: .12 });
+  document.querySelectorAll(".aparece").forEach((el, i) => {
+    el.style.transitionDelay = (i < 2 ? i * .2 : 0) + "s";
+    io.observe(el);
+  });
+}
+
+/* ===== Cuenta regresiva ===== */
+const meta = new Date(CONFIG.fecha).getTime();
+function tic(){
+  let d = Math.max(0, meta - Date.now());
+  const dias = Math.floor(d / 864e5); d %= 864e5;
+  const hrs = Math.floor(d / 36e5); d %= 36e5;
+  const min = Math.floor(d / 6e4); d %= 6e4;
+  const seg = Math.floor(d / 1e3);
+  [["d",dias],["h",hrs],["m",min],["s",seg]].forEach(([id,v]) =>
+    document.getElementById(id).textContent = String(v).padStart(2,"0"));
+}
+tic(); setInterval(tic, 1000);
+
+/* ===== Votación (se guarda en Netlify Forms) ===== */
+const inputNombre = document.getElementById("nombreVoto");
+const msg = document.getElementById("mensajeVoto");
+const botonesVoto = document.querySelectorAll(".voto");
+let equipo = null, votoGuardado = null;
+try {
+  equipo = localStorage.getItem("bs-equipo");
+  votoGuardado = localStorage.getItem("bs-voto-enviado");
+  inputNombre.value = localStorage.getItem("bs-nombre") || "";
+} catch(e){}
+
+function marcar(eq){
+  botonesVoto.forEach(b => {
+    b.classList.toggle("elegido", b.dataset.equipo === eq);
+    b.classList.toggle("apagado", b.dataset.equipo !== eq);
+  });
+  if (eq === "nino"){ msg.textContent = "¡Eres Team Azul! Te esperamos de azul 💙"; msg.style.color = "var(--marino)"; }
+  else { msg.textContent = "¡Eres Team Rosa! Te esperamos de rosa 💗"; msg.style.color = "var(--rosa)"; }
+}
+function guardarVoto(nombre, eq){
+  const clave = nombre.toLowerCase() + "|" + eq;
+  if (votoGuardado === clave) return;
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ "form-name": "votos", nombre, equipo: eq === "nino" ? "Niño" : "Niña" }).toString()
+  }).then(r => {
+    if (r.ok){ votoGuardado = clave; try { localStorage.setItem("bs-voto-enviado", clave); } catch(e){} }
+  }).catch(() => {});
+}
+botonesVoto.forEach(b => b.addEventListener("click", () => {
+  const nombre = inputNombre.value.trim();
+  if (!nombre){
+    inputNombre.classList.remove("error"); void inputNombre.offsetWidth;
+    inputNombre.classList.add("error"); inputNombre.focus();
+    msg.textContent = "Escribe tu nombre para registrar tu voto ✨"; msg.style.color = "var(--marino)";
+    return;
+  }
+  equipo = b.dataset.equipo;
+  try { localStorage.setItem("bs-equipo", equipo); localStorage.setItem("bs-nombre", nombre); } catch(e){}
+  const r = b.getBoundingClientRect();
+  explotar(r.left + r.width / 2, r.top + r.height / 2, 120, equipo, 12);
+  marcar(equipo);
+  guardarVoto(nombre, equipo);
+}));
+inputNombre.addEventListener("input", () => inputNombre.classList.remove("error"));
+if (equipo) marcar(equipo);
+</script>
+</body>
+</html>
