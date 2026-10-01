@@ -7,21 +7,25 @@
 <meta name="description" content="¡Estás invitado a nuestro Baby Shower! 25 de octubre 2026 · 3:00 pm">
 <!-- Vista previa al compartir el link (WhatsApp, Facebook, etc.) -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://diegomo-ux.github.io/Baby_shower/">
+<meta property="og:url" content="https://baby-shower-25-09.netlify.app/">
 <meta property="og:title" content="Baby Shower💙💗">
 <meta property="og:description" content="¡Tienes una invitación! 25 de octubre 2026 · 3:00 pm. Ábrela y descubre la sorpresa.">
-<meta property="og:image" content="https://diegomo-ux.github.io/Baby_shower/preview.jpg">
+<meta property="og:image" content="https://baby-shower-25-09.netlify.app/preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Sobre de invitación al Baby Shower: ¿Niño o Niña?">
 <meta property="og:locale" content="es_MX">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://diegomo-ux.github.io/Baby_shower/preview.jpg">
+<meta name="twitter:image" content="https://baby-shower-25-09.netlify.app/preview.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --marino:#1d4e9e; --rosa:#ef4f7e; --rosa-o:#d8406f;
-    --cielo:#dcebff; --chicle:#ffe3ec; --blanco:#fff;
+    /* Paleta neutra: cacao, terracota, salvia, arena y crema */
+    --marino:#4b4237; --rosa:#c47a5a; --rosa-o:#a9634a;
+    --cielo:#e4e9db; --chicle:#f4eadd; --blanco:#fffaf3;
+    /* Solo para la votación */
+    --rosa-v-o:#b37570; --rosa-v-bg:#f5e4e1;
+    --azul-v-o:#6a849f; --azul-v-bg:#e3eaf1;
     --titulo:'Lilita One',system-ui,sans-serif;
     --texto:'Fredoka',system-ui,sans-serif;
   }
@@ -29,11 +33,11 @@
   html{font-size:18px}
   body{
     font-family:var(--texto);color:var(--marino);min-height:100vh;overflow-x:hidden;
-    background:#c9d8f7;
+    background:#d6dcc9;
   }
-  body::before{content:"";position:fixed;inset:0;z-index:0;background:linear-gradient(118deg,#f9c3d3 0 42%,#c9d8f7 42% 100%)}
-  .rosa{--c1:#f9a8c3;--c2:#ef4f7e;--c3:#d8406f}
-  .azul{--c1:#8ec5fb;--c2:#2d6bd3;--c3:#2a5fb8}
+  body::before{content:"";position:fixed;inset:0;z-index:0;background:linear-gradient(118deg,#ead8c3 0 42%,#d6dcc9 42% 100%)}
+  .rosa{--c1:#e3b49b;--c2:#c47a5a;--c3:#a9634a}
+  .azul{--c1:#b7c4a6;--c2:#7f9170;--c3:#66765a}
   .ico{display:block;overflow:visible;height:auto;aspect-ratio:1}
 
   /* ===== Animaciones base ===== */
@@ -60,25 +64,25 @@
   /* ===== Pantalla de entrada ===== */
   #intro{
     position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
-    background:linear-gradient(118deg,#f9c3d3 0 50%,#c9d8f7 50% 100%);
+    background:linear-gradient(118deg,#ead8c3 0 50%,#d6dcc9 50% 100%);
     transition:opacity .8s, visibility .8s;padding:20px;text-align:center;overflow:hidden;
   }
   #intro.oculto{opacity:0;visibility:hidden}
   .sello{
     width:240px;height:240px;border-radius:50%;border:10px solid #fff;cursor:pointer;
     background:var(--cielo);
-    box-shadow:0 18px 40px rgba(29,78,158,.25);
+    box-shadow:0 18px 40px rgba(75,66,55,.25);
     display:flex;flex-direction:column;align-items:center;justify-content:center;
     font-family:var(--titulo);line-height:.9;animation:latido 2s ease-in-out infinite;
   }
   .sello .el{font-size:3.4rem;color:var(--marino)}
   .sello .o{font-size:1.6rem;color:var(--marino);margin:2px 0}
   .sello .ella{font-size:3.4rem;color:var(--rosa)}
-  .intro-txt{font-family:var(--titulo);font-size:1.5rem;color:#fff;text-shadow:0 2px 0 var(--marino),0 3px 10px rgba(29,78,158,.35);letter-spacing:.03em}
+  .intro-txt{font-family:var(--titulo);font-size:1.6rem;color:var(--marino);text-shadow:0 3px 0 #fffaf3;letter-spacing:.03em}
   .intro-sub{font-weight:500;color:var(--marino);opacity:.8}
 
   /* ===== Botón de música ===== */
-  #musica{position:fixed;right:16px;bottom:16px;z-index:55;width:60px;height:60px;border-radius:50%;border:5px solid #fff;background:var(--rosa);color:#fff;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(29,78,158,.25)}
+  #musica{position:fixed;right:16px;bottom:16px;z-index:55;width:60px;height:60px;border-radius:50%;border:5px solid #fff;background:var(--rosa);color:#fff;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(75,66,55,.25)}
   #musica.visible{display:flex}
   #musica svg{width:24px;height:24px}
   #musica.sonando svg{animation:girar 4s linear infinite}
@@ -90,7 +94,7 @@
   .aparece.visible{opacity:1;transform:none}
 
   /* Sticker: borde blanco + sombra */
-  .sticker{position:relative;background:#fff;padding:10px;border-radius:40px;box-shadow:0 14px 34px rgba(29,78,158,.18)}
+  .sticker{position:relative;background:#fffaf3;padding:10px;border-radius:40px;box-shadow:0 14px 34px rgba(75,66,55,.18)}
   .sticker > .in{position:relative;border-radius:31px;overflow:hidden;padding:34px 22px;text-align:center}
   .fondo-cielo{background:var(--cielo)}
   .sticker > .in.holgado{padding:44px 34px}
@@ -107,7 +111,7 @@
   .arco > .in{border-radius:250px 250px 31px 31px;padding:64px 20px 60px}
   .pill{display:inline-block;background:var(--rosa);color:#fff;font-family:var(--titulo);font-size:1.15rem;letter-spacing:.2em;padding:8px 22px 7px;border-radius:40px;box-shadow:0 4px 0 var(--rosa-o)}
   h1{font-family:var(--titulo);font-weight:400;line-height:.88;margin:18px 0 10px}
-  h1 span{display:block;text-shadow:0 5px 0 #fff,0 10px 18px rgba(29,78,158,.18)}
+  h1 span{display:block;text-shadow:0 5px 0 #fff,0 10px 18px rgba(75,66,55,.18)}
   h1 .nino{font-size:clamp(3.8rem,17vw,5.8rem);color:var(--marino)}
   h1 .o{font-size:2.2rem;color:var(--marino);margin:4px 0}
   h1 .nina{font-size:clamp(3.8rem,17vw,5.8rem);color:var(--rosa)}
@@ -115,12 +119,12 @@
   .ilustra{position:relative;height:150px;margin:24px auto 0;max-width:360px}
   .interroga{position:absolute;font-family:var(--titulo);font-size:3rem;cursor:pointer;animation:flotar 3.5s ease-in-out infinite}
 
-  .texto{font-size:1.3rem;line-height:1.55;font-weight:500;color:#3a4f78;max-width:430px;margin:0 auto}
+  .texto{font-size:1.3rem;line-height:1.55;font-weight:500;color:#62584c;max-width:430px;margin:0 auto}
   .texto b{color:var(--rosa)}
 
   /* ===== Fecha y hora ===== */
   .detalles{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .forma{filter:drop-shadow(0 12px 18px rgba(29,78,158,.2))}
+  .forma{filter:drop-shadow(0 12px 18px rgba(75,66,55,.2))}
   .forma .borde{background:#fff;padding:9px}
   .forma .relleno{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative}
   .escudo .borde,.escudo .relleno{clip-path:polygon(0 0,100% 0,100% 80%,50% 100%,0 80%)}
@@ -129,6 +133,7 @@
   .hexa .borde,.hexa .relleno{clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%)}
   .hexa .borde{padding:10px 14px}
   .hexa .relleno{background:var(--cielo);min-height:250px;padding:20px 10px}
+  .escudo-b .relleno{background:var(--cielo)}
   .etq{font-family:var(--titulo);font-size:1.05rem;letter-spacing:.2em;color:var(--rosa)}
   .grande{font-family:var(--titulo);font-size:4.6rem;line-height:.95;color:var(--marino)}
   .medio{font-family:var(--titulo);font-size:1.8rem;line-height:1;color:var(--marino)}
@@ -138,38 +143,40 @@
   .titulo-sec{font-family:var(--titulo);font-weight:400;font-size:2.3rem;line-height:1;color:var(--marino);text-align:center}
   .titulo-sec .r{color:var(--rosa)}
   .cuenta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
-  .cuenta div{aspect-ratio:1;border-radius:50%;border:7px solid #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 10px 22px rgba(29,78,158,.16)}
+  .cuenta div{aspect-ratio:1;border-radius:50%;border:7px solid #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 10px 22px rgba(75,66,55,.16)}
   .cuenta div:nth-child(odd){background:var(--cielo)}
   .cuenta div:nth-child(even){background:var(--chicle)}
   .cuenta b{font-family:var(--titulo);font-weight:400;font-size:2.6rem;line-height:1;color:var(--marino)}
   .cuenta div:nth-child(even) b{color:var(--rosa)}
-  .cuenta span{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#3a4f78}
+  .cuenta span{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#62584c}
 
   /* ===== Votación ===== */
   .team{font-family:var(--titulo);font-weight:400;line-height:.95;margin-bottom:12px}
-  .team .tr{display:block;font-size:2.7rem;color:var(--rosa)}
+  .team .tr{display:block;font-size:2.7rem;color:var(--rosa-v-o)}
   .team .to{display:block;font-size:1.5rem;color:var(--marino)}
-  .team .ta{display:block;font-size:2.7rem;color:var(--marino)}
+  .team .ta{display:block;font-size:2.7rem;color:var(--azul-v-o)}
   #nombreVoto{
     width:100%;max-width:340px;margin-top:18px;padding:15px 20px;border-radius:40px;border:3px solid #fff;
     background:#fff;text-align:center;font-family:var(--texto);font-size:1.15rem;font-weight:500;color:var(--marino);
-    outline:none;box-shadow:0 6px 16px rgba(29,78,158,.12)
+    outline:none;box-shadow:0 6px 16px rgba(75,66,55,.12)
   }
-  #nombreVoto::placeholder{color:#8aa0c8}
+  #nombreVoto::placeholder{color:#a99f92}
   #nombreVoto:focus{border-color:var(--rosa)}
   #nombreVoto.error{border-color:var(--rosa);animation:temblor .4s}
   .votos{display:flex;justify-content:center;gap:18px;margin-top:24px}
   .voto{
     width:150px;aspect-ratio:1;border-radius:50%;border:8px solid #fff;cursor:pointer;
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
-    box-shadow:0 12px 24px rgba(29,78,158,.2);transition:transform .3s,opacity .3s;
+    box-shadow:0 12px 24px rgba(75,66,55,.2);transition:transform .3s,opacity .3s;
     font-family:var(--titulo);font-size:1.15rem;letter-spacing:.05em;-webkit-tap-highlight-color:transparent
   }
   .voto svg{width:70px;height:70px}
-  .voto.rosa{background:var(--chicle);color:var(--rosa)}
-  .voto.azul{background:var(--cielo);color:var(--marino)}
+  .voto.v-rosa{background:var(--rosa-v-bg);color:var(--rosa-v-o)}
+  .voto.v-azul{background:var(--azul-v-bg);color:var(--azul-v-o)}
+  .v-rosa{--c1:#e2b7b2;--c2:#c98a84;--c3:#b37570}
+  .v-azul{--c1:#b4c5d6;--c2:#7f98b2;--c3:#6a849f}
   .voto:hover{transform:translateY(-5px) rotate(-3deg)}
-  .voto.elegido{transform:scale(1.1);box-shadow:0 0 0 6px currentColor,0 14px 28px rgba(29,78,158,.25)}
+  .voto.elegido{transform:scale(1.1);box-shadow:0 0 0 6px currentColor,0 14px 28px rgba(75,66,55,.25)}
   .voto.apagado{opacity:.4;transform:scale(.92)}
   #mensajeVoto{min-height:34px;margin-top:18px;font-size:1.3rem;font-weight:600}
 
@@ -178,16 +185,16 @@
     display:inline-flex;align-items:center;gap:12px;margin-top:18px;
     padding:18px 32px;border-radius:50px;border:5px solid #fff;text-decoration:none;
     font-family:var(--titulo);font-size:1.35rem;letter-spacing:.06em;color:#fff;background:var(--marino);
-    box-shadow:0 6px 0 #133a7a,0 14px 24px rgba(29,78,158,.3);transition:transform .15s,box-shadow .15s
+    box-shadow:0 6px 0 #2f2820,0 14px 24px rgba(75,66,55,.3);transition:transform .15s,box-shadow .15s
   }
   .btn-mapa:hover{transform:translateY(-2px)}
-  .btn-mapa:active{transform:translateY(4px);box-shadow:0 2px 0 #133a7a,0 6px 12px rgba(29,78,158,.3)}
+  .btn-mapa:active{transform:translateY(4px);box-shadow:0 2px 0 #2f2820,0 6px 12px rgba(75,66,55,.3)}
   .btn-mapa svg{width:26px;height:26px}
-  .confirma{margin-top:30px;font-size:1.3rem;font-weight:500;line-height:1.45;color:#3a4f78}
+  .confirma{margin-top:30px;font-size:1.3rem;font-weight:500;line-height:1.45;color:#62584c}
   .confirma strong{display:block;font-family:var(--titulo);font-weight:400;font-size:1.8rem;color:var(--rosa);margin-bottom:4px}
 
   .final{text-align:center;padding:10px 0 0}
-  .final .titulo-sec{font-size:3.2rem;color:var(--marino);text-shadow:0 4px 0 #fff,0 10px 20px rgba(29,78,158,.2)}
+  .final .titulo-sec{font-size:3.2rem;color:var(--marino);text-shadow:0 4px 0 #fff,0 10px 20px rgba(75,66,55,.2)}
   .final .titulo-sec .r{color:var(--rosa)}
   .firma{font-size:1.25rem;font-weight:600;color:var(--marino);margin-top:10px}
   .pista{font-size:.9rem;font-weight:500;color:var(--marino);opacity:.7;margin-top:18px}
@@ -239,7 +246,7 @@
       <path d="M18 70 Q18 24 50 24 Q82 24 82 70 Z" fill="var(--c1)" stroke="var(--c3)" stroke-width="3" stroke-linejoin="round"/>
       <path d="M34 30 Q28 48 28 68 M50 25 V68 M66 30 Q72 48 72 68" stroke="#fff" stroke-width="3" opacity=".55" fill="none"/>
       <rect x="13" y="64" width="74" height="20" rx="9" fill="var(--c2)" stroke="var(--c3)" stroke-width="3"/>
-      <polygon points="50,67 52.4,72 58,72.6 53.8,76.4 55,82 50,79 45,82 46.2,76.4 42,72.6 47.6,72" fill="#ffd66b"/>
+      <polygon points="50,67 52.4,72 58,72.6 53.8,76.4 55,82 50,79 45,82 46.2,76.4 42,72.6 47.6,72" fill="#d9b26a"/>
     </symbol>
     <symbol id="i-sonaja" viewBox="0 0 100 100">
       <path d="M50 14 c-18-13-26-2-20 8 c4 7 20 18 20 18 s16-11 20-18 c6-10-2-21-20-8z" fill="var(--c1)" stroke="var(--c3)" stroke-width="3"/>
@@ -257,6 +264,11 @@
     </symbol>
   </defs>
 </svg>
+
+<!-- Formulario oculto para que Netlify guarde los votos -->
+<form name="votos" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input name="nombre"><input name="equipo"><input name="bot-field">
+</form>
 
 <audio id="cancion" src="cancion.mp3" loop preload="auto"></audio>
 
@@ -291,8 +303,8 @@
     <div class="in fondo-cielo">
       <svg class="ico deco" style="width:26px;top:60px;left:22%;color:#fff"><use href="#i-estrella"/></svg>
       <svg class="ico deco" style="width:22px;top:90px;right:18%;color:var(--rosa);animation-delay:-1s"><use href="#i-corazon"/></svg>
-      <svg class="ico deco" style="width:20px;top:48%;left:6%;color:#8ec5fb;animation-delay:-2s"><use href="#i-estrella"/></svg>
-      <svg class="ico deco" style="width:20px;top:44%;right:6%;color:#f9a8c3;animation-delay:-1.5s"><use href="#i-corazon"/></svg>
+      <svg class="ico deco" style="width:20px;top:48%;left:6%;color:#b7c4a6;animation-delay:-2s"><use href="#i-estrella"/></svg>
+      <svg class="ico deco" style="width:20px;top:44%;right:6%;color:#e3b49b;animation-delay:-1.5s"><use href="#i-corazon"/></svg>
 
       <span class="pill">BABY SHOWER</span>
       <h1>
@@ -342,7 +354,7 @@
         <span class="chico">Domingo · 2026</span>
       </div></div>
     </div>
-    <div class="forma escudo">
+    <div class="forma escudo escudo-b">
       <div class="borde"><div class="relleno">
         <span class="etq">HORA</span>
         <span class="grande">3:00</span>
@@ -373,13 +385,13 @@
         <span class="to">o</span>
         <span class="ta">TEAM AZUL?</span>
       </h2>
-      <p class="texto">Ven vestido de <b style="color:var(--marino)">azul</b> si crees que es niño, o de <b>rosa</b> si crees que es niña. ¡Escribe tu nombre y vota!</p>
+      <p class="texto">Ven vestido de <b style="color:var(--azul-v-o)">azul</b> si crees que es niño, o de <b style="color:var(--rosa-v-o)">rosa</b> si crees que es niña. ¡Escribe tu nombre y vota!</p>
       <input id="nombreVoto" type="text" placeholder="Tu nombre" maxlength="60" autocomplete="name">
       <div class="votos">
-        <button class="voto rosa" data-equipo="nina">
+        <button class="voto v-rosa" data-equipo="nina">
           <svg class="ico"><use href="#i-mameluco"/></svg>NIÑA
         </button>
-        <button class="voto azul" data-equipo="nino">
+        <button class="voto v-azul" data-equipo="nino">
           <svg class="ico"><use href="#i-mameluco"/></svg>NIÑO
         </button>
       </div>
@@ -421,12 +433,10 @@
    CONFIGURACIÓN — edita aquí tus datos
    ================================================ */
 const CONFIG = {
-  mapa: "https://maps.app.goo.gl/kVPr9z38vKTLhDBu5",
+  mapa: "https://maps.app.goo.gl/Hwitgxeba6m7suDn6",
   fecha: "2026-10-25T15:00:00-06:00",
   firma: "Con cariño, los futuros papás",
-  volumen: 0.6,         // 0 a 1
-  // Pega aquí la URL de tu Apps Script (termina en /exec):
-  sheets: "https://script.google.com/macros/s/AKfycbwiJ1f2BLjEpZsnPJ_0J3iJfGhPyMgwA2o9BWp6or4BKnZQt2Ye-MZleo2KYZNuqEfD/exec"
+  volumen: 0.6          // 0 a 1
 };
 
 const btnMapa = document.getElementById("btnMapa");
@@ -451,9 +461,11 @@ let piezas = [];
 function ajustar(){ cv.width = innerWidth; cv.height = innerHeight; }
 addEventListener("resize", ajustar); ajustar();
 const PALETA = {
-  mix:  ["#1d4e9e","#ef4f7e","#8ec5fb","#f9a8c3","#ffd66b","#ffffff"],
-  nino: ["#1d4e9e","#2d6bd3","#8ec5fb","#ffd66b","#ffffff"],
-  nina: ["#ef4f7e","#d8406f","#f9a8c3","#ffd66b","#ffffff"]
+  mix:  ["#4b4237","#c47a5a","#b7c4a6","#e3b49b","#d9b26a","#fffaf3"],
+  nino: ["#6a849f","#9fb4c8","#cdd9e5","#d9b26a","#fffaf3"],
+  nina: ["#b37570","#d9a6a1","#ecd0cc","#d9b26a","#fffaf3"],
+  terra: ["#c47a5a","#e3b49b","#a9634a","#d9b26a","#fffaf3"],
+  salvia:["#7f9170","#b7c4a6","#66765a","#d9b26a","#fffaf3"]
 };
 function explotar(x, y, n = 80, paleta = "mix", fuerza = 9){
   const cols = PALETA[paleta];
@@ -493,7 +505,7 @@ document.querySelectorAll(".deco, .interroga").forEach(el => {
   el.addEventListener("pointerdown", () => {
     el.classList.remove("salta"); void el.getBoundingClientRect(); el.classList.add("salta");
     const r = el.getBoundingClientRect();
-    const pal = el.classList.contains("azul") ? "nino" : el.classList.contains("rosa") ? "nina" : "mix";
+    const pal = el.classList.contains("azul") ? "salvia" : el.classList.contains("rosa") ? "terra" : "mix";
     explotar(r.left + r.width / 2, r.top + r.height / 2, 18, pal, 5);
   });
   el.addEventListener("animationend", () => el.classList.remove("salta"));
@@ -501,7 +513,7 @@ document.querySelectorAll(".deco, .interroga").forEach(el => {
 
 /* ===== Globos de fondo ===== */
 const capa = document.getElementById("globos");
-const TONOS = [["#8ec5fb","nino"],["#2d6bd3","nino"],["#f9a8c3","nina"],["#ef4f7e","nina"],["#ffd66b","mix"]];
+const TONOS = [["#b7c4a6","salvia"],["#8fa27f","salvia"],["#e3b49b","terra"],["#c47a5a","terra"],["#e8d6b8","mix"],["#d9b26a","mix"]];
 function crearGlobo(){
   const [color, pal] = TONOS[Math.random() * TONOS.length | 0];
   const esc = .7 + Math.random() * .6;
@@ -557,7 +569,7 @@ function tic(){
 }
 tic(); setInterval(tic, 1000);
 
-/* ===== Votación (se guarda en Google Sheets) ===== */
+/* ===== Votación (se guarda en Netlify Forms) ===== */
 const inputNombre = document.getElementById("nombreVoto");
 const msg = document.getElementById("mensajeVoto");
 const botonesVoto = document.querySelectorAll(".voto");
@@ -573,20 +585,18 @@ function marcar(eq){
     b.classList.toggle("elegido", b.dataset.equipo === eq);
     b.classList.toggle("apagado", b.dataset.equipo !== eq);
   });
-  if (eq === "nino"){ msg.textContent = "¡Eres Team Azul! Te esperamos de azul 💙"; msg.style.color = "var(--marino)"; }
-  else { msg.textContent = "¡Eres Team Rosa! Te esperamos de rosa 💗"; msg.style.color = "var(--rosa)"; }
+  if (eq === "nino"){ msg.textContent = "¡Eres Team Azul! Te esperamos de azul 💙"; msg.style.color = "var(--azul-v-o)"; }
+  else { msg.textContent = "¡Eres Team Rosa! Te esperamos de rosa 💗"; msg.style.color = "var(--rosa-v-o)"; }
 }
 function guardarVoto(nombre, eq){
   const clave = nombre.toLowerCase() + "|" + eq;
   if (votoGuardado === clave) return;
-  if (!CONFIG.sheets || !CONFIG.sheets.startsWith("https://")) return;
-  fetch(CONFIG.sheets, {
+  fetch("/", {
     method: "POST",
-    mode: "no-cors",
-    body: new URLSearchParams({ nombre, equipo: eq === "nino" ? "Niño" : "Niña" })
-  }).then(() => {
-    votoGuardado = clave;
-    try { localStorage.setItem("bs-voto-enviado", clave); } catch(e){}
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ "form-name": "votos", nombre, equipo: eq === "nino" ? "Niño" : "Niña" }).toString()
+  }).then(r => {
+    if (r.ok){ votoGuardado = clave; try { localStorage.setItem("bs-voto-enviado", clave); } catch(e){} }
   }).catch(() => {});
 }
 botonesVoto.forEach(b => b.addEventListener("click", () => {
