@@ -7,16 +7,16 @@
 <meta name="description" content="¡Estás invitado a nuestro Baby Shower! 25 de octubre 2026 · 3:00 pm">
 <!-- Vista previa al compartir el link (WhatsApp, Facebook, etc.) -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://baby-shower-25-09.netlify.app/">
+<meta property="og:url" content="https://diegomo-ux.github.io/Baby_shower/">
 <meta property="og:title" content="Baby Shower · ¿Niño o Niña? 💙💗">
 <meta property="og:description" content="¡Tienes una invitación! 25 de octubre 2026 · 3:00 pm. Ábrela y descubre la sorpresa.">
-<meta property="og:image" content="https://baby-shower-25-09.netlify.app/preview.jpg">
+<meta property="og:image" content="https://diegomo-ux.github.io/Baby_shower/preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Sobre de invitación al Baby Shower: ¿Niño o Niña?">
 <meta property="og:locale" content="es_MX">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://baby-shower-25-09.netlify.app/preview.jpg">
+<meta name="twitter:image" content="https://diegomo-ux.github.io/Baby_shower/preview.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -258,11 +258,6 @@
   </defs>
 </svg>
 
-<!-- Formulario oculto para que Netlify guarde los votos -->
-<form name="votos" data-netlify="true" netlify-honeypot="bot-field" hidden>
-  <input name="nombre"><input name="equipo"><input name="bot-field">
-</form>
-
 <audio id="cancion" src="cancion.mp3" loop preload="auto"></audio>
 
 <!-- ===== Pantalla de entrada ===== -->
@@ -406,7 +401,7 @@
       </a>
       <p class="confirma">
         <strong>Por favor, confirma tu asistencia</strong>
-        <br>¡Nos encantará contar contigo!
+        ¡Nos encantará contar contigo!
       </p>
       <svg class="ico deco azul" style="width:52px;left:24px;bottom:10px;--r:-14deg"><use href="#i-calcetin"/></svg>
       <svg class="ico deco rosa" style="width:50px;right:24px;bottom:12px;--r:14deg;animation-delay:-1.2s"><use href="#i-biberon"/></svg>
@@ -429,10 +424,13 @@ const CONFIG = {
   mapa: "https://maps.app.goo.gl/Hwitgxeba6m7suDn6",
   fecha: "2026-10-25T15:00:00-06:00",
   firma: "Con cariño, los futuros papás",
-  volumen: 0.6          // 0 a 1
+  volumen: 0.6,         // 0 a 1
+  // Pega aquí la URL de tu Apps Script (termina en /exec):
+  sheets: "https://script.google.com/macros/s/AKfycbwiJ1f2BLjEpZsnPJ_0J3iJfGhPyMgwA2o9BWp6or4BKnZQt2Ye-MZleo2KYZNuqEfD/exec"
 };
 
-document.getElementById("btnMapa").href = CONFIG.mapa;
+const btnMapa = document.getElementById("btnMapa");
+if (btnMapa) btnMapa.href = CONFIG.mapa;
 document.getElementById("firma").textContent = CONFIG.firma;
 
 /* ===== Música ===== */
@@ -559,7 +557,7 @@ function tic(){
 }
 tic(); setInterval(tic, 1000);
 
-/* ===== Votación (se guarda en Netlify Forms) ===== */
+/* ===== Votación (se guarda en Google Sheets) ===== */
 const inputNombre = document.getElementById("nombreVoto");
 const msg = document.getElementById("mensajeVoto");
 const botonesVoto = document.querySelectorAll(".voto");
@@ -581,12 +579,14 @@ function marcar(eq){
 function guardarVoto(nombre, eq){
   const clave = nombre.toLowerCase() + "|" + eq;
   if (votoGuardado === clave) return;
-  fetch("/", {
+  if (!CONFIG.sheets || !CONFIG.sheets.startsWith("https://")) return;
+  fetch(CONFIG.sheets, {
     method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({ "form-name": "votos", nombre, equipo: eq === "nino" ? "Niño" : "Niña" }).toString()
-  }).then(r => {
-    if (r.ok){ votoGuardado = clave; try { localStorage.setItem("bs-voto-enviado", clave); } catch(e){} }
+    mode: "no-cors",
+    body: new URLSearchParams({ nombre, equipo: eq === "nino" ? "Niño" : "Niña" })
+  }).then(() => {
+    votoGuardado = clave;
+    try { localStorage.setItem("bs-voto-enviado", clave); } catch(e){}
   }).catch(() => {});
 }
 botonesVoto.forEach(b => b.addEventListener("click", () => {
